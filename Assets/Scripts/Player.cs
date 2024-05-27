@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum PlayerState
+{
+    IDLE,
+    WALK,
+    JUMP
+}
+
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     //public float speed = 5;
     Animator animator;
+    public PlayerState state;
 
     Vector2 direction;
     public float force;
@@ -17,11 +25,12 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        state = PlayerState.IDLE;
     }
 
     void Update()
-    {  
-
+    {
         float hor = Input.GetAxis("Horizontal");
         direction = new Vector2(hor, 0);
 
@@ -34,14 +43,32 @@ public class Player : MonoBehaviour
             rb.AddRelativeForce(direction * force);
         }
 
-        if (hor > 0)
+        switch (state)
         {
-            transform.localScale = new Vector2(6.7f, 6.7f);
-        }
-        else if (hor < 0)
-        {
-            transform.localScale = new Vector2(-6.7f, 6.7f);
+            case PlayerState.IDLE:
+                ChangeState(PlayerState.IDLE);
+                break;
+            case PlayerState.WALK:
+                ChangeState(PlayerState.WALK);
+                break;
+            case PlayerState.JUMP:
+                ChangeState(PlayerState.JUMP);
+                break;
         }
 
     }
+    public void ChangeState(PlayerState newState)
+    {
+        switch (newState)
+        {
+            case PlayerState.IDLE:
+                break;
+            case PlayerState.WALK:
+                break;
+            case PlayerState.JUMP:
+                break;
+        }
+    }
+
+
 }
