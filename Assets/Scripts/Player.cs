@@ -20,21 +20,7 @@ public class Player : MonoBehaviour
     }
 
     void Update()
-    {
-        /*float hor = Input.GetAxis("Horizontal");
-        Vector2 direction = Vector2.right * hor;
-        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
-
-        animator.SetFloat("hor", Mathf.Abs(hor));
-
-        if (hor > 0)
-        {
-            transform.localScale = new Vector2(6.7f, 6.7f);
-        }
-        else if (hor < 0)
-        {
-            transform.localScale = new Vector2(-6.7f, 6.7f);
-        }*/
+    {  
 
         float hor = Input.GetAxis("Horizontal");
         direction = new Vector2(hor, 0);
@@ -46,6 +32,15 @@ public class Player : MonoBehaviour
         else
         {
             rb.AddRelativeForce(direction * force);
+        }
+
+        if (hor > 0)
+        {
+            transform.localScale = new Vector2(6.7f, 6.7f);
+        }
+        else if (hor < 0)
+        {
+            transform.localScale = new Vector2(-6.7f, 6.7f);
         }
 
     }
